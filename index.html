@@ -1,0 +1,68 @@
+<h1 id="counter">counter</h1>
+<button onclick="getdata()">getdata</button>
+<div id="result"></div>
+<table border="2px">
+    <thead>
+        <tr>
+        <th>id</th>
+        <th>email</th>
+        <th>first name</th>
+        <th>last name</th>
+        <th>Avatar</th>
+        </tr>
+    </thead>
+    <tbody id="records">
+        <tr>
+        <th>Id</th>
+        <th>email</th>
+        <th>first name</th>
+        <th>last name</th>
+        <th>Avatar</th>
+
+        </tr>
+    </tbody>
+</table>
+<script>
+    // document.getElementById("result").innerHTML=result['data'][0][`email`]
+    function getdata() {
+        url=`https://reqres.in/api/users?page=1`
+        fetch(url)
+        .then(res=> res.json())
+        .then(result=>
+        {
+            // console.log(result)
+            // console.log(result['data'])
+            console.table(result['data'])
+            // console.table(result);
+            console.log(result['data'][0][`email`])
+
+
+            
+            // document.getElementById("result").innerHTML=result['data'][0][`email`] 
+            // document.getElementById("result").innerHTML=result['data'][1][`name`]
+
+            output=''
+
+            for(let i=0;i<6;i++)
+            {
+
+            output+=`<tr>
+        <td>${result['data'][i][`id`]}</td>
+        <td>${result['data'][i][`email`]}</td>
+        <td>${result['data'][i][`first_name`]}</td>
+        <td>${result['data'][i][`last_name`]}</td>
+        <td>${result['data'][i][`avatar`]}</td>
+        <td><img src="${result['data'][i]['avatar']}"/></td>
+    
+
+
+        </tr>`
+    }
+        document.getElementById("records").innerHTML=output
+
+
+
+        })
+        
+    }
+</script>
